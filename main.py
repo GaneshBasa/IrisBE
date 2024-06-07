@@ -1,3 +1,4 @@
+from os import environ
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,3 +11,7 @@ app.add_middleware( CORSMiddleware, allow_origins=ORIGINS, allow_credentials=Tru
 @app.get('/')
 async def root():
   return {'message': 'Hello from Iris App FastAPI Back-End'}
+
+@app.get( '/env' )
+async def get_env( var_name: str ):
+  return environ.get( var_name )
