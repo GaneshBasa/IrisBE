@@ -1,4 +1,5 @@
 from os import environ
+from json import loads
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -14,4 +15,7 @@ async def root():
 
 @app.get( '/env' )
 async def get_env( var_name: str ):
-  return environ.get( var_name )
+  if var := environ.get( var_name ):
+    return loads( var )
+  else:
+    return var
