@@ -13,6 +13,10 @@ app = FastAPI()
 async def root():
   return {'message': 'Hello from Iris App FastAPI Back-End'}
 
-@app.get( '/env' )
-async def get_env( var_name: str ):
+@app.get( '/env_str' )
+async def get_env_str( var_name: str ):
   return environ.get( var_name )
+
+@app.get( '/env_json' )
+async def get_env_json( var_name: str ):
+  return loads( environ.get( var_name ) )
