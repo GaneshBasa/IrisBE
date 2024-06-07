@@ -3,11 +3,11 @@ from json import loads
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.config import ORIGINS
+from app.config import ORIGINS, ORIGIN_REGEX
 
 app = FastAPI()
 
-app.add_middleware( CORSMiddleware, allow_origins=ORIGINS, allow_credentials=True, allow_methods=['*'], allow_headers=['*'] )
+app.add_middleware( CORSMiddleware, allow_origins=ORIGINS, allow_origin_regex=ORIGIN_REGEX, allow_credentials=True, allow_methods=['*'], allow_headers=['*'] )
 
 @app.get( '/' )
 async def root():
@@ -17,10 +17,6 @@ async def root():
 async def get_orgs():
   return ORIGINS
 
-@app.get( '/env_str' )
-async def get_env_str( var_name: str ):
-  return environ.get( var_name )
-
-@app.get( '/env_json' )
-async def get_env_json( var_name: str ):
-  return loads( environ.get( var_name ) )
+@app.get( '/org_rgx' )
+async def get_org_rgx():
+  return ORIGIN_REGEX
