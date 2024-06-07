@@ -3,15 +3,19 @@ from json import loads
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# from app.config import ORIGINS
+from app.config import ORIGINS
 
 app = FastAPI()
 
 # app.add_middleware( CORSMiddleware, allow_origins=ORIGINS, allow_credentials=True, allow_methods=['*'], allow_headers=['*'] )
 
-@app.get('/')
+@app.get( '/' )
 async def root():
-  return {'message': 'Hello from Iris App FastAPI Back-End'}
+  return { 'message': 'Hello from Iris App FastAPI Back-End' }
+
+@app.get( '/orgs' )
+async def get_orgs():
+  return ORIGINS
 
 @app.get( '/env_str' )
 async def get_env_str( var_name: str ):
