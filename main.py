@@ -15,7 +15,4 @@ async def root():
 
 @app.get( '/env' )
 async def get_env( var_name: str ):
-  if var := environ.get( var_name ):
-    return loads( var )
-  else:
-    return var
+  return environ.get( var_name )
