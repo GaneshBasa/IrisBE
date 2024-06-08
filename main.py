@@ -1,5 +1,3 @@
-from os import environ
-from json import loads
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -11,12 +9,4 @@ app.add_middleware( CORSMiddleware, allow_origins=ORIGINS, allow_origin_regex=OR
 
 @app.get( '/' )
 async def root():
-  return { 'message': 'Hello from Iris App FastAPI Back-End' }
-
-@app.get( '/orgs' )
-async def get_orgs():
-  return ORIGINS
-
-@app.get( '/org_rgx' )
-async def get_org_rgx():
-  return ORIGIN_REGEX
+  return { 'message': 'Hello from Iris App FastAPI Server' }
