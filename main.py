@@ -26,5 +26,5 @@ app.add_middleware(
 
 
 @app.get( '/' )
-async def root():
-  return { 'message': 'Hello from Iris App FastAPI Server' }
+async def http_root():
+  return { 'http_msg': 'Hello from Iris App FastAPI Server' }
