@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
@@ -28,3 +28,14 @@ app.add_middleware(
 @app.get( '/' )
 async def http_root():
   return { 'http_msg': 'Hello from Iris App FastAPI Server' }
+
+
+@app.websocket( '/' )
+async def ws_root( ws: WebSocket ):
+  try:
+    await ws.accept()
+    await ws.send_json( { 'ws_msg': 'Hello from Iris App FastAPI Server' } )
+    await ws.close()
+  
+  except WebSocketDisconnect:
+    pass
