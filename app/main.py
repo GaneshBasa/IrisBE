@@ -43,7 +43,7 @@ async def ws_root( ws: WebSocket ):
 
 
 @app.websocket( '/test' )
-async def test( ws: WebSocket ):
+async def ws_test( ws: WebSocket ):
   try:
     await ws.accept()
     
